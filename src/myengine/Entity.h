@@ -1,5 +1,3 @@
-#include "Component.h"
-
 #include <vector>
 #include <memory>
 
@@ -10,8 +8,6 @@ struct Component;
 
 struct Entity
 {
-
-  ~Entity();
 
   template <typename T>
   std::shared_ptr<T> addComponent()
