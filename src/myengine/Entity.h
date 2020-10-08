@@ -1,4 +1,7 @@
+#include "Component.h"
+
 #include <vector>
+#include <memory>
 
 namespace myengine
 {
@@ -7,6 +10,8 @@ struct Component;
 
 struct Entity
 {
+
+  ~Entity();
 
   template <typename T>
   std::shared_ptr<T> addComponent()
@@ -17,6 +22,8 @@ struct Entity
 
     return rtn;
   }
+
+  void tick();
 
 private:
   std::vector<std::shared_ptr<Component>> components;

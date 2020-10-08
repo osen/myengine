@@ -32,7 +32,11 @@ endif()
 
 add_library(myengine
   src/myengine/Core.cpp
+  src/myengine/Entity.cpp
+
   src/myengine/Core.h
+  src/myengine/Entity.h
+  src/myengine/Component.h
 )
 target_link_libraries(myengine rend)
 

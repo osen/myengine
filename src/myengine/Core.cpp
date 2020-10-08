@@ -20,5 +20,13 @@ std::shared_ptr<Entity> Core::addEntity()
   return rtn;
 }
 
+void Core::start()
+{
+  for(size_t ei = 0; ei < entities.size(); ei++)
+  {
+    entities.at(ei)->tick();
+  }
+}
+
 }
 

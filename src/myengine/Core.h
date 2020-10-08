@@ -12,6 +12,8 @@ struct Core
 
   std::shared_ptr<Entity> addEntity();
 
+  void start();
+
 private:
   std::vector<std::shared_ptr<Entity>> entities;
 
