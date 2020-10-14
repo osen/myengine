@@ -6,6 +6,8 @@ set(PLATFORM "${CMAKE_SYSTEM_NAME}")
 set(ARCH "${CMAKE_SYSTEM_PROCESSOR}")
 message("${COMP}-${PLATFORM}-${ARCH}")
 
+add_definitions(-DSDL_MAIN_HANDLED)
+
 include_directories(
   src
   ${PROJECT_SOURCE_DIR}/contrib/${COMP}-${PLATFORM}-${ARCH}/include
@@ -35,12 +37,16 @@ add_library(myengine
   src/myengine/Core.cpp
   src/myengine/Entity.cpp
   src/myengine/Component.cpp
+  src/myengine/Exception.cpp
+  src/myengine/Renderer.cpp
 
   src/myengine/Core.h
   src/myengine/Entity.h
   src/myengine/Component.h
+  src/myengine/Exception.h
+  src/myengine/Renderer.h
 )
-target_link_libraries(myengine rend)
+target_link_libraries(myengine rend SDL2)
 
 add_executable(demo
   src/demo/main.cpp

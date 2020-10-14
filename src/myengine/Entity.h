@@ -22,6 +22,7 @@ struct Entity
   }
 
   void tick();
+  void render();
 
 private:
   std::vector<std::shared_ptr<Component>> components;

@@ -9,6 +9,9 @@ struct Component
   void tick();
   virtual void onTick();
 
+  void render();
+  virtual void onRender();
+
 };
 
 }
