@@ -17,6 +17,12 @@ link_directories(
   ${PROJECT_SOURCE_DIR}/contrib/${COMP}-${PLATFORM}-${ARCH}/lib
 )
 
+if(MINGW)
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s -static")
+  add_definitions(-DGLEW_STATIC)
+  set(STATIC_LIBS imm32 iconv winmm ole32 gdi32 oleaut32 version)
+endif()
+
 add_library(rend
   src/rend/Exception.cpp
   src/rend/Context.cpp
@@ -46,7 +52,7 @@ add_library(myengine
   src/myengine/Exception.h
   src/myengine/Renderer.h
 )
-target_link_libraries(myengine rend SDL2)
+target_link_libraries(myengine rend SDL2 ${STATIC_LIBS})
 
 add_executable(demo
   src/demo/main.cpp
