@@ -21,6 +21,13 @@ if(MINGW)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s -static")
   add_definitions(-DGLEW_STATIC)
   set(STATIC_LIBS imm32 iconv winmm ole32 gdi32 oleaut32 version)
+  set(LIBGLEW glew32)
+  set(LIBSDL2 SDL2)
+elseif(MSVC)
+  add_definitions(-DGLEW_STATIC)
+  set(STATIC_LIBS imm32 winmm setupapi version)
+  set(LIBGLEW glew32s)
+  set(LIBSDL2 SDL2-static)
 endif()
 
 add_library(rend
@@ -34,7 +41,7 @@ add_library(rend
   src/rend/Util.cpp
 )
 if(MSVC OR MINGW)
-  target_link_libraries(rend glew32 opengl32)
+  target_link_libraries(rend ${LIBGLEW} opengl32)
 else()
   target_link_libraries(rend GLEW GL)
 endif()
@@ -52,7 +59,7 @@ add_library(myengine
   src/myengine/Exception.h
   src/myengine/Renderer.h
 )
-target_link_libraries(myengine rend SDL2 ${STATIC_LIBS})
+target_link_libraries(myengine rend ${LIBSDL2} ${STATIC_LIBS})
 
 add_executable(demo
   src/demo/main.cpp
