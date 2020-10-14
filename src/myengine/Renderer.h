@@ -9,6 +9,7 @@ namespace myengine
 
 struct Renderer : public Component
 {
+  void onInitialize();
   void onRender();
 
 private:
