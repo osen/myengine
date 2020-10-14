@@ -1,18 +1,19 @@
 cmake_minimum_required(VERSION 2.6)
-project(COOLENG)
+project(MYENGINE)
+
+set(COMP "${CMAKE_CXX_COMPILER_ID}")
+set(PLATFORM "${CMAKE_SYSTEM_NAME}")
+set(ARCH "${CMAKE_SYSTEM_PROCESSOR}")
+message("${COMP}-${PLATFORM}-${ARCH}")
 
 include_directories(
   src
+  ${PROJECT_SOURCE_DIR}/contrib/${COMP}-${PLATFORM}-${ARCH}/include
 )
 
-if(MSVC)
-  include_directories(
-    ${PROJECT_SOURCE_DIR}/contrib/msvc-windows-x86/include
-  )
-  link_directories(
-    ${PROJECT_SOURCE_DIR}/contrib/msvc-windows-x86/lib
-  )
-endif()
+link_directories(
+  ${PROJECT_SOURCE_DIR}/contrib/${COMP}-${PLATFORM}-${ARCH}/lib
+)
 
 add_library(rend
   src/rend/Exception.cpp
@@ -33,6 +34,7 @@ endif()
 add_library(myengine
   src/myengine/Core.cpp
   src/myengine/Entity.cpp
+  src/myengine/Component.cpp
 
   src/myengine/Core.h
   src/myengine/Entity.h

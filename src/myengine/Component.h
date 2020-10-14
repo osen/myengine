@@ -6,7 +6,9 @@ namespace myengine
 
 struct Component
 {
-  int dummy;
+  void tick();
+  virtual void onTick();
+
 };
 
 }
