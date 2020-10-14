@@ -7,10 +7,13 @@
 namespace myengine
 {
 
+struct Renderer;
 struct Entity;
 
 struct Core
 {
+  friend struct myengine::Renderer;
+
   static std::shared_ptr<Core> initialize();
 
   std::shared_ptr<Entity> addEntity();
