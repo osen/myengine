@@ -1,6 +1,8 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Exception.h"
+#include "Transform.h"
+#include "Keyboard.h"
 
 namespace myengine
 {
@@ -28,8 +30,14 @@ std::shared_ptr<Core> Core::initialize()
   }
 
   rtn->context = rend::Context::initialize();
+  rtn->keyboard = std::make_shared<Keyboard>();
 
   return rtn;
+}
+
+std::shared_ptr<Keyboard> Core::getKeyboard()
+{
+  return keyboard;
 }
 
 std::shared_ptr<Entity> Core::addEntity()
@@ -37,6 +45,8 @@ std::shared_ptr<Entity> Core::addEntity()
   std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
   rtn->core = self;
   rtn->self = rtn;
+
+  rtn->addComponent<Transform>();
 
   entities.push_back(rtn);
 
@@ -56,6 +66,22 @@ void Core::start()
       {
         running = false;
       }
+      else if(e.type == SDL_KEYDOWN)
+      {
+        keyboard->keys.push_back(e.key.keysym.sym);
+        keyboard->downKeys.push_back(e.key.keysym.sym);
+      }
+      else if(e.type == SDL_KEYUP)
+      {
+        for(std::vector<int>::iterator it = keyboard->keys.begin();
+          it != keyboard->keys.end();)
+        {
+          if(*it == e.key.keysym.sym) it = keyboard->keys.erase(it);
+          else it++;
+        }
+
+        keyboard->upKeys.push_back(e.key.keysym.sym);
+      }
     }
 
     for(size_t ei = 0; ei < entities.size(); ei++)
@@ -72,6 +98,9 @@ void Core::start()
     }
 
     SDL_GL_SwapWindow(window);
+
+    keyboard->downKeys.clear();
+    keyboard->upKeys.clear();
   }
 }
 

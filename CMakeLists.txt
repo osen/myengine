@@ -28,6 +28,8 @@ elseif(MSVC)
   set(STATIC_LIBS imm32 winmm setupapi version)
   set(LIBGLEW glew32s)
   set(LIBSDL2 SDL2-static)
+else()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
 endif()
 
 add_library(rend
@@ -52,12 +54,16 @@ add_library(myengine
   src/myengine/Component.cpp
   src/myengine/Exception.cpp
   src/myengine/Renderer.cpp
+  src/myengine/Transform.cpp
+  src/myengine/Keyboard.cpp
 
   src/myengine/Core.h
   src/myengine/Entity.h
   src/myengine/Component.h
   src/myengine/Exception.h
   src/myengine/Renderer.h
+  src/myengine/Transform.h
+  src/myengine/Keyboard.h
 )
 target_link_libraries(myengine rend ${LIBSDL2} ${STATIC_LIBS})
 
@@ -65,3 +71,4 @@ add_executable(demo
   src/demo/main.cpp
 )
 target_link_libraries(demo myengine)
+

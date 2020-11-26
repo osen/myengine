@@ -1,0 +1,21 @@
+n Default
+f
+t RightLowerLeg -1.20708 0 0 0 0 0
+t RightUpperLeg -1.16891 0 0 0 0 0
+t LeftUpperLeg -3.86016 0 0 0 0 0
+t LeftLowerLeg 3.59505 0.891421 0 0 0 0
+f
+t RightLowerLeg -1.20708 0.89142 -48.7323 30 1 0
+t RightUpperLeg -1.16891 0 -17.8933 35 7 0
+t LeftUpperLeg -3.86016 1.41927 33.9038 -50 0 3
+t LeftLowerLeg 3.59505 17.3827 71.7249 -31 0 0
+f
+t RightLowerLeg -1.20708 0 0 0 0 0
+t RightUpperLeg -1.16891 0 0 0 0 0
+t LeftUpperLeg -3.86016 0 0 0 0 0
+t LeftLowerLeg 3.59505 0.891421 0 0 0 0
+f
+t RightLowerLeg -1.20708 22.7312 67.1219 -30 -1 0
+t RightUpperLeg 2.33781 3.54812 24.4855 -54 -7 3
+t LeftUpperLeg -3.86016 -2.83853 -25.4278 32 -2 0
+t LeftLowerLeg -35.9505 0.891421 -53.3339 43 -11 0

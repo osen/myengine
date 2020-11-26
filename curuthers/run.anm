@@ -1,0 +1,21 @@
+n Run
+f
+t RightLowerLeg 0.09 0.31 -1.26 55 4 0
+t RightUpperLeg 0.04 0.08 -0.27 44 -6 0
+t LeftUpperLeg 0.08 0.07 0.22 -75 -7 0
+t LeftLowerLeg -0.0799999 0.92 1.19 -43 -5 -3
+f
+t RightLowerLeg -0.0225 0.0249999 -0.125 10.75 -1 0
+t RightUpperLeg -0.01 0.035 -0.07 -0.5 -0.75 0
+t LeftUpperLeg 0.055 0.0475 0.00499991 -10.5 -2 0
+t LeftLowerLeg 0.0175001 0.0699999 0.0700002 5 2 -2.25
+f
+t RightLowerLeg -0.075 0.46 0.81 -33.5 -6 0
+t RightUpperLeg -0.05 0.04 0.13 -45 4.5 0
+t LeftUpperLeg 0.03 0.025 -0.21 54 3 0
+t LeftLowerLeg -0.065 0.34 -1.21 53 9 -1.5
+f
+t RightLowerLeg -0.0325 0.0249999 -0.225 10.75 -1 0
+t RightUpperLeg -0.01 0.035 -0.07 -0.5 -0.75 0
+t LeftUpperLeg 0.055 0.0475 0.00499992 -10.5 -2 0
+t LeftLowerLeg -0.0124999 0.0799998 0.0600001 5 2 -2.25

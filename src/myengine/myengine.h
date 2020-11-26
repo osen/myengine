@@ -5,6 +5,11 @@
 #include "Entity.h"
 #include "Component.h"
 #include "Renderer.h"
+#include "Exception.h"
+#include "Transform.h"
+#include "Keyboard.h"
+
+#include <rend/rend.h>
 
 using namespace myengine;
 

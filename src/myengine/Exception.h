@@ -1,3 +1,6 @@
+#ifndef MYENGINE_EXCEPTION_H
+#define MYENGINE_EXCEPTION_H
+
 #include <exception>
 #include <string>
 
@@ -16,3 +19,5 @@ private:
 };
 
 }
+
+#endif

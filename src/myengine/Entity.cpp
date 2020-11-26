@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "Component.h"
+#include "Transform.h"
 
 namespace myengine
 {
@@ -23,6 +24,11 @@ void Entity::render()
 std::shared_ptr<Core> Entity::getCore()
 {
   return core.lock();
+}
+
+std::shared_ptr<Transform> Entity::getTransform()
+{
+  return getComponent<Transform>();
 }
 
 }
