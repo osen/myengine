@@ -6,7 +6,7 @@ struct Player : public Component
 {
   void onInitialize(int team, int type, std::string name)
   {
-
+    std::shared_ptr<Renderer> r = getEntity()->addComponent<Renderer>();
   }
 
   void onTick()
@@ -29,26 +29,13 @@ int main()
 {
   std::shared_ptr<Core> core = Core::initialize();
 
-  // Create entity and add render onto it
   std::shared_ptr<Entity> pe = core->addEntity();
-  std::shared_ptr<Renderer> r = pe->addComponent<Renderer>();
-  r->getTransform()->setPosition(rend::vec3(0, 0, -10));
+  pe->getTransform()->setPosition(rend::vec3(0, 0, -10));
+  std::shared_ptr<Player> p = pe->addComponent<Player>(1, 2, "Karsten");
 
-  //r->setShader(core->getResources()->load<Shader>("shaders/bloom"));
-  //r->setModel(core->getResources()->load<Model>("models/curuthers"));
-  //r->setTexture(core->getResources()->load<Texture>("textures/highlight"));
-
-  // Create entity 2 and add render onto it
   std::shared_ptr<Entity> pe2 = core->addEntity();
   std::shared_ptr<Renderer> r2 = pe2->addComponent<Renderer>();
   r2->getTransform()->setPosition(rend::vec3(2, 1, -5));
-
-  // Add sample component
-  std::shared_ptr<Player> p = pe->addComponent<Player>(1, 2, "Karsten");
-  //std::shared_ptr<Player> p = pe->addComponent<Player>();
-
-  //std::shared_ptr<Entity> ce = core->addEntity();
-  //ce->addComponent<Camera>();
 
   core->start();
 
