@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Entity.h"
 #include "Exception.h"
+#include "Camera.h"
 
 #include <fstream>
 #include <string>
@@ -18,12 +19,13 @@ void Renderer::onInitialize()
     "attribute vec2 a_TexCoord;              " \
     "attribute vec3 a_Normal;                " \
     "uniform mat4 u_Projection;              " \
+    "uniform mat4 u_View;                    " \
     "uniform mat4 u_Model;                   " \
     "varying vec2 v_TexCoord;                " \
     "                                        " \
     "void main()                             " \
     "{                                       " \
-    "  gl_Position = u_Projection * u_Model * vec4(a_Position, 1); " \
+    "  gl_Position = u_Projection * u_View * u_Model * vec4(a_Position, 1); " \
     "  v_TexCoord = a_TexCoord;              " \
     "  if(a_Normal.x == 9) gl_Position.x = 7;" \
     "}                                       " \
@@ -69,10 +71,7 @@ void Renderer::onRender()
   shader->setUniform("u_Projection", rend::perspective(rend::radians(45.0f),
     1.0f, 0.1f, 100.0f));
 
-/*
-  shader->setUniform("u_View",
-    rend::inverse(getCore()->getCurrentCamera()->getTransform()->getModel()));
-*/
+  shader->setUniform("u_View", getCore()->getCamera()->getView());
 
   shader->setUniform("u_Model", getEntity()->getTransform()->getModel());
 

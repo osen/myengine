@@ -18,6 +18,7 @@ struct Core
 
   std::shared_ptr<Entity> addEntity();
   std::shared_ptr<Keyboard> getKeyboard();
+  std::shared_ptr<Camera> getCamera();
 
   void start();
 
@@ -31,6 +32,8 @@ private:
   SDL_GLContext glContext;
   std::shared_ptr<rend::Context> context;
   std::shared_ptr<Keyboard> keyboard;
+
+  std::weak_ptr<Camera> currentCamera;
   std::vector<std::weak_ptr<Camera> > cameras;
 
 };

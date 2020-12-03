@@ -40,6 +40,11 @@ std::shared_ptr<Keyboard> Core::getKeyboard()
   return keyboard;
 }
 
+std::shared_ptr<Camera> Core::getCamera()
+{
+  return currentCamera.lock();
+}
+
 std::shared_ptr<Entity> Core::addEntity()
 {
   std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
@@ -91,10 +96,20 @@ void Core::start()
 
     glClearColor(0.39f, 0.58f, 0.93f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glViewport(0, 0, 800, 600);
 
-    for(size_t ei = 0; ei < entities.size(); ei++)
+    for(size_t ci = 0; ci < cameras.size(); ci++)
     {
-      entities.at(ei)->render();
+      currentCamera = cameras.at(ci);
+      // Clear screen after activating render buffer
+      glClear(GL_DEPTH_BUFFER_BIT);
+
+      for(size_t ei = 0; ei < entities.size(); ei++)
+      {
+        entities.at(ei)->render();
+      }
+
+      glViewport(0, 0, 320, 240);
     }
 
     SDL_GL_SwapWindow(window);

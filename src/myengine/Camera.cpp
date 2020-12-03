@@ -1,5 +1,10 @@
 #include "Camera.h"
 #include "Core.h"
+#include "Entity.h"
+#include "Transform.h"
+
+namespace myengine
+{
 
 void Camera::onInitialize()
 {
@@ -11,3 +16,6 @@ rend::mat4 Camera::getView()
 {
   return rend::inverse(getTransform()->getModel());
 }
+
+}
+

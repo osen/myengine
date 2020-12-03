@@ -8,6 +8,7 @@
 #include "Exception.h"
 #include "Transform.h"
 #include "Keyboard.h"
+#include "Camera.h"
 
 #include <rend/rend.h>
 
