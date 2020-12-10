@@ -9,13 +9,26 @@
 namespace myengine
 {
 
+/*
+struct MaterialGroup
+{
+  std::shared_ptr<rend::Mesh> mesh;
+  std::shared_ptr<Texture> texture;
+};
+*/
+
+struct Renderer;
+
 struct Model : public Resource
 {
   void onLoad();
 
 private:
+  friend struct myengine::Renderer;
+
   std::shared_ptr<rend::Mesh> mesh;
 
+  //std::vector<MaterialGroup> groups;
 };
 
 }

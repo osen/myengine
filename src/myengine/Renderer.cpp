@@ -4,9 +4,11 @@
 #include "Entity.h"
 #include "Exception.h"
 #include "Camera.h"
+#include "Model.h"
 
 #include <fstream>
 #include <string>
+#include <iostream>
 
 namespace myengine
 {
@@ -45,29 +47,14 @@ void Renderer::onInitialize()
   shader = getCore()->context->createShader();
   shader->parse(src);
 
-  shape = getCore()->context->createMesh();
-  std::ifstream file("models/curuthers/curuthers.obj");
-
-  if(!file.is_open())
-  {
-    throw Exception("Failed to open model file");
-  }
-
-  std::string content;
-  std::string line;
-
-  while(!file.eof())
-  {
-    getline(file, line);
-    content += line + "\n";
-  }
-
-  shape->parse(content);
+  //model = getResources()->load<Model>("internal/placeholder");
 }
 
 void Renderer::onRender()
 {
-  shader->setMesh(shape);
+  if(!model) return;
+
+  shader->setMesh(model->mesh);
 
   shader->setUniform("u_Projection", rend::perspective(rend::radians(45.0f),
     1.0f, 0.1f, 100.0f));
@@ -91,6 +78,11 @@ void Renderer::onRender()
   {
     shader->render();
   }
+}
+
+void Renderer::setModel(std::shared_ptr<Model> model)
+{
+  this->model = model;
 }
 
 }

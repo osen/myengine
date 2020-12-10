@@ -6,15 +6,10 @@ struct Player : public Component
   {
     std::shared_ptr<Renderer> r = getEntity()->addComponent<Renderer>();
 
-    std::shared_ptr<Model> cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
-    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
-    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
-    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
-    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
-    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    std::shared_ptr<Model> cm = getCore()->getResources()->
+      load<Model>("models/curuthers/curuthers");
 
-    //r->setModel(cm);
-
+    r->setModel(cm);
   }
 
   //void onGui()
