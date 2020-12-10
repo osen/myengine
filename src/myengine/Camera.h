@@ -11,6 +11,13 @@ struct Camera : public Component
   //void onDestroy();
 
   rend::mat4 getView();
+  std::shared_ptr<rend::RenderTexture> getRenderTexture();
+
+  std::shared_ptr<rend::RenderTexture> addRenderTexture();
+
+private:
+  std::shared_ptr<rend::RenderTexture> renderTexture;
+
 };
 
 }

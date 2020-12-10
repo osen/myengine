@@ -9,6 +9,9 @@
 #include "Transform.h"
 #include "Keyboard.h"
 #include "Camera.h"
+#include "Model.h"
+#include "Resource.h"
+#include "Resources.h"
 
 #include <rend/rend.h>
 

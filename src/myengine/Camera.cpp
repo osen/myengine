@@ -17,5 +17,17 @@ rend::mat4 Camera::getView()
   return rend::inverse(getTransform()->getModel());
 }
 
+std::shared_ptr<rend::RenderTexture> Camera::getRenderTexture()
+{
+  return renderTexture;
+}
+
+std::shared_ptr<rend::RenderTexture> Camera::addRenderTexture()
+{
+  renderTexture = getCore()->context->createRenderTexture();
+
+  return renderTexture;
+}
+
 }
 

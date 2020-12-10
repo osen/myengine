@@ -32,6 +32,7 @@ void Renderer::onInitialize()
     "                                        " \
     "\n#endif\n                              " \
     "\n#ifdef FRAGMENT\n                     " \
+    "uniform sampler2D u_Texture;            " \
     "varying vec2 v_TexCoord;                " \
     "                                        " \
     "void main()                             " \
@@ -45,7 +46,7 @@ void Renderer::onInitialize()
   shader->parse(src);
 
   shape = getCore()->context->createMesh();
-  std::ifstream file("curuthers/curuthers.obj");
+  std::ifstream file("models/curuthers/curuthers.obj");
 
   if(!file.is_open())
   {
@@ -72,10 +73,24 @@ void Renderer::onRender()
     1.0f, 0.1f, 100.0f));
 
   shader->setUniform("u_View", getCore()->getCamera()->getView());
-
   shader->setUniform("u_Model", getEntity()->getTransform()->getModel());
 
-  shader->render();
+  //shader->setSampler("u_Texture", texture->internal);
+
+  std::shared_ptr<Camera> c = getCore()->getCamera();
+
+  // iterate model parts
+  //   set shader texture = part->texture
+  //   render
+
+  if(c->getRenderTexture())
+  {
+    shader->render(c->getRenderTexture());
+  }
+  else
+  {
+    shader->render();
+  }
 }
 
 }

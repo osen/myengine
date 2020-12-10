@@ -3,6 +3,7 @@
 #include "Exception.h"
 #include "Transform.h"
 #include "Keyboard.h"
+#include "Resources.h"
 
 namespace myengine
 {
@@ -32,12 +33,20 @@ std::shared_ptr<Core> Core::initialize()
   rtn->context = rend::Context::initialize();
   rtn->keyboard = std::make_shared<Keyboard>();
 
+  rtn->resources = std::make_shared<Resources>();
+  rtn->resources->core = rtn;
+
   return rtn;
 }
 
 std::shared_ptr<Keyboard> Core::getKeyboard()
 {
   return keyboard;
+}
+
+std::shared_ptr<Resources> Core::getResources()
+{
+  return resources;
 }
 
 std::shared_ptr<Camera> Core::getCamera()
@@ -96,11 +105,19 @@ void Core::start()
 
     glClearColor(0.39f, 0.58f, 0.93f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glViewport(0, 0, 800, 600);
 
     for(size_t ci = 0; ci < cameras.size(); ci++)
     {
       currentCamera = cameras.at(ci);
+
+      //rend::vec4 vp = currentCamera.getViewport();
+      //glViewport(vp.x, vp.y, vp.z, vp.w);
+
+      //if(currentCamera.lock()->getRenderTarget())
+      //{
+      //  currentCamera.lock()->getRenderTarget()->activate();
+      //}
+
       // Clear screen after activating render buffer
       glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -109,7 +126,7 @@ void Core::start()
         entities.at(ei)->render();
       }
 
-      glViewport(0, 0, 320, 240);
+      // deactivate
     }
 
     SDL_GL_SwapWindow(window);

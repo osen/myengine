@@ -15,6 +15,7 @@ struct Renderer : public Component
 private:
   std::shared_ptr<rend::Shader> shader;
   std::shared_ptr<rend::Mesh> shape;
+  // std::shared_ptr<Texture> texture;
 
 };
 

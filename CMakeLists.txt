@@ -57,6 +57,8 @@ add_library(myengine
   src/myengine/Transform.cpp
   src/myengine/Keyboard.cpp
   src/myengine/Camera.cpp
+  src/myengine/Resource.cpp
+  src/myengine/Model.cpp
 
   src/myengine/Core.h
   src/myengine/Entity.h

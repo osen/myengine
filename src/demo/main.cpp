@@ -5,9 +5,22 @@ struct Player : public Component
   void onInitialize(int team, int type, std::string name)
   {
     std::shared_ptr<Renderer> r = getEntity()->addComponent<Renderer>();
-    //r->setShader(getResources()->load<Shader>("shaders/basic"));
-    //r->setModel(getResources()->load<Model>("models/curuthers/curuthers"));
+
+    std::shared_ptr<Model> cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+    cm = getCore()->getResources()->load<Model>("models/curuthers/curuthers");
+
+    //r->setModel(cm);
+
   }
+
+  //void onGui()
+  //{
+  //  getCore()->getGui()->draw(rt, 0, 0, 100, 100);
+  //}
 };
 
 struct Controller : public Component
@@ -59,7 +72,8 @@ int main()
   std::shared_ptr<Entity> c2 = core->addEntity();
   c2->getTransform()->setPosition(rend::vec3(0, 20, 0));
   c2->getTransform()->rotate(-90, 0, 0);
-  c2->addComponent<Camera>();
+  std::shared_ptr<Camera> mc = c2->addComponent<Camera>();
+  mc->addRenderTexture();
 
   core->start();
 
