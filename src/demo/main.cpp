@@ -33,11 +33,11 @@ struct Controller : public Component
 
     if(getCore()->getKeyboard()->getKey('e'))
     {
-      getTransform()->rotate(0, 0.1f, 0);
+      getTransform()->rotate(0, 2, 0);
     }
     else if(getCore()->getKeyboard()->getKey('q'))
     {
-      getTransform()->rotate(0, -0.1f, 0);
+      getTransform()->rotate(0, 2, 0);
     }
   }
 };
