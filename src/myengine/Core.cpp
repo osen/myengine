@@ -59,6 +59,7 @@ std::shared_ptr<Entity> Core::addEntity()
   std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
   rtn->core = self;
   rtn->self = rtn;
+  rtn->alive = true;
 
   rtn->addComponent<Transform>();
 
@@ -101,6 +102,15 @@ void Core::start()
     for(size_t ei = 0; ei < entities.size(); ei++)
     {
       entities.at(ei)->tick();
+    }
+
+    for(size_t ei = 0; ei < entities.size(); ei++)
+    {
+      if(entities.at(ei)->alive == false)
+      {
+        entities.erase(entities.begin() + ei);
+        ei--;
+      }
     }
 
     glClearColor(0.39f, 0.58f, 0.93f, 1.0f);

@@ -14,9 +14,15 @@ void Component::render()
   onRender();
 }
 
+void Component::destroy()
+{
+  onDestroy();
+}
+
 void Component::onInitialize() { }
 void Component::onTick() { }
 void Component::onRender() { }
+void Component::onDestroy() { }
 
 std::shared_ptr<Entity> Component::getEntity()
 {

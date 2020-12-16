@@ -1,5 +1,7 @@
 #include <myengine/myengine.h>
 
+#include <iostream>
+
 struct Player : public Component
 {
   void onInitialize(int team, int type, std::string name)
@@ -18,26 +20,43 @@ struct Player : public Component
   //}
 };
 
+struct Killer : public Component
+{
+  void onTick()
+  {
+    if(getCore()->getKeyboard()->getKey('k'))
+    {
+      std::cout << "Should destroy" << std::endl;
+      getEntity()->destroy();
+    }
+  }
+
+  void onDestroy()
+  {
+    std::cout << "Destroyed" << std::endl;
+  }
+};
+
 struct Controller : public Component
 {
   void onTick()
   {
     if(getCore()->getKeyboard()->getKey('w'))
     {
-      getTransform()->translate(0, 0, 0.1f);
+      getTransform()->translate(0, 0, -0.1f);
     }
     else if(getCore()->getKeyboard()->getKey('s'))
     {
-      getTransform()->translate(0, 0, -0.1f);
+      getTransform()->translate(0, 0, 0.1f);
     }
 
-    if(getCore()->getKeyboard()->getKey('e'))
+    if(getCore()->getKeyboard()->getKey('a'))
     {
-      getTransform()->rotate(0, 2, 0);
+      getTransform()->rotate(0, 1, 0);
     }
-    else if(getCore()->getKeyboard()->getKey('q'))
+    else if(getCore()->getKeyboard()->getKey('d'))
     {
-      getTransform()->rotate(0, 2, 0);
+      getTransform()->rotate(0, -1, 0);
     }
   }
 };
@@ -52,13 +71,16 @@ int main()
   std::shared_ptr<Entity> pe = core->addEntity();
   pe->getTransform()->setPosition(rend::vec3(0, 0, -10));
   std::shared_ptr<Player> p = pe->addComponent<Player>(1, 2, "Karsten");
+  pe->addComponent<Killer>();
 
   /*
    * Add sample object to collide against
    */
+/*
   std::shared_ptr<Entity> pe2 = core->addEntity();
   std::shared_ptr<Renderer> r2 = pe2->addComponent<Renderer>();
   r2->getTransform()->setPosition(rend::vec3(2, 1, -5));
+*/
 
   std::shared_ptr<Entity> camera = core->addEntity();
   camera->addComponent<Camera>();

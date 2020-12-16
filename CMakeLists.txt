@@ -21,15 +21,28 @@ if(MINGW)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s -static")
   add_definitions(-DGLEW_STATIC)
   set(STATIC_LIBS imm32 iconv winmm ole32 gdi32 oleaut32 version)
-  set(LIBGLEW glew32)
   set(LIBSDL2 SDL2)
+  set(LIBGL opengl32)
+  set(LIBGLEW glew32)
 elseif(MSVC)
   add_definitions(-DGLEW_STATIC)
   set(STATIC_LIBS imm32 winmm setupapi version)
+  set(LIBGL opengl32)
   set(LIBGLEW glew32s)
   set(LIBSDL2 SDL2-static)
 else()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
+  #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2")
+  include_directories(
+    /usr/X11R6/include
+    /usr/local/include
+  )
+  link_directories(
+    /usr/X11R6/lib
+    /usr/local/lib
+  )
+  set(LIBSDL2 SDL2)
+  set(LIBGL GL)
+  set(LIBGLEW GLEW)
 endif()
 
 add_library(rend
@@ -42,11 +55,7 @@ add_library(rend
   src/rend/Mesh.cpp
   src/rend/Util.cpp
 )
-if(MSVC OR MINGW)
-  target_link_libraries(rend ${LIBGLEW} opengl32)
-else()
-  target_link_libraries(rend GLEW GL)
-endif()
+target_link_libraries(rend ${LIBGLEW} ${LIBGL})
 
 add_library(myengine
   src/myengine/Core.cpp
